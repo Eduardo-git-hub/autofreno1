@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+  Listar Categoria
+{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+{% endblock extra_css %}
+{% block body %}
+
+<div class="container">
+  <form class="form-inline my-2 my-lg-0" method="GET" action="">
+    <input class="form-control mr-sm-2" type="text" name="buscar" placeholder="Filtrar por nombre" value="{{ request.GET.buscar }}">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
+</div>
+<br>
+
+  {% if categorias %}
+
+  <div class="col-sm-12">
+  <table class="table table-striped table-bordered datatable no-footer" role="grid" aria-describedby="bootstrap-data-table_info">
+    <thead>
+      <tr role="row">
+        <th class = "text-center">#</th>
+        <th class = "text-center">Nombres</th>
+        <th class = "text-center">Ubicacion</th>
+        <th class = "text-center">Descipcion</th>
+        {% if request.user.is_staff %}
+        <th class = "text-center">Opciones</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+        {% for categoria in categorias %}
+          <tr>
+            <td>{{categoria.id}}</td>
+            <td>{{categoria.nombre}}</td>
+            <td>{{categoria.ubicacion}}</td>
+            <td>{{categoria.descipcion}}</td>
+            {% if request.user.is_staff %}
+            <td class = "text-center">
+              <a href="{% url 'inventario:editar_categoria' categoria.id %}" class="fa ti-pencil" ></a>
+              <a href="{% url 'inventario:eliminar_categoria' categoria.id %}" class="fa fa-trash"></a>
+            </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  </div>
+  {% else %}
+  <h1>No existen categorias</h1>
+  {% endif %}
+
+  <span class="current" style="color: black; margin-left: 500px; font-size:22px; width: 100%">
+      página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+  </span>
+  <div class="col-lg-3 col-md-6 mb-4" style="font-size:22px; width: 100%">
+    <div class="pagination" style="color: black">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <!--<a href="?page=1" style="color: black">&laquo; primera</a>-->
+                  <a href="?page={{ page_obj.previous_page_number }}" style="color: black">Anterior</a>
+              {% endif %}
+
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}" style="color: black">Siguiente</a>
+                  <!--<a href="?page={{ page_obj.paginator.num_pages }}" style="color: black">ultimo &raquo;</a>-->
+              {% endif %}
+          </span>
+    </div>
+  </div>
+
+{% endblock body %}
+
+{% block extrajs %}
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/lib/data-table/dataTables.bootstrap.min.js' %}"></script>
+{% endblock extrajs %}

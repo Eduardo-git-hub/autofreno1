@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Confirmacion de eliminación
+{% endblock title %}
+{% block body %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p><strong>¿Desea eliminar el registro {{ object }}?</strong></p>
+  <button type="submit" class="btn btn-primary">Confirmar</button>
+  <a href="{% url 'catalogo:listar_catalogo' %}" class="btn btn-danger" type="button">Cancelar</a>
+</form>
+{% endblock body %}

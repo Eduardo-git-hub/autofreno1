@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Crear Usuario
+{% endblock title %}
+{% block body %}
+<form  method="post">
+      {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+      {% else %}
+        <div class="card">
+          <div class="card-header">
+            <strong>Formulario de Usuarios</strong>
+          </div>
+          <div class="card-body card-block">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.username.label }}</div>
+                <div class="col-12 col-md-9">{{ form.username }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.email.label }}</div>
+                <div class="col-12 col-md-9">{{ form.email }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.nombres.label }}</div>
+                <div class="col-12 col-md-9">{{ form.nombres }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.apellidos.label }}</div>
+                <div class="col-12 col-md-9">{{ form.apellidos }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.password1.label }}</div>
+                <div class="col-12 col-md-9">{{ form.password1 }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.password2.label }}</div>
+                <div class="col-12 col-md-9">{{ form.password2 }}</div>
+              </div>
+              <label><strong>Privilegios</strong></label>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.usuario_activo.label }}</div>
+                <div class="col-12 col-md-9"> Activo por defecto </div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.usuario_administrador.label }}
+                </div>
+                <div class="col-12 col-md-9">{{ form.usuario_administrador }}
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'usuarios:listar_usuarios'%}" type="button" class='btn btn-danger'>Cancelar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+</form>
+
+{% endblock body %}

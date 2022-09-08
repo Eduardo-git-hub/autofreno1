@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Registar Pastilla
+{% endblock title %}
+{% block body %}
+<form  method="post">
+      {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+      {% else %}
+        <div class="card">
+          <div class="card-header">
+            <strong>Formulario de Productos</strong>
+          </div>
+          <div class="card-body card-block">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+              {% if request.user.is_staff %}
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.codigo.label }}</div>
+                <div class="col-12 col-md-9">{{ form.codigo }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.repuesto.label }}</div>
+                <div class="col-12 col-md-9">{{ form.repuesto }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.cantidad.label }}</div>
+                <div class="col-12 col-md-9">{{ form.cantidad }}</div>
+              </div>
+              {% endif %}
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.scant.label }}</div>
+                <div class="col-12 col-md-9">{{ form.scant }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.rcant.label }}</div>
+                <div class="col-12 col-md-9">{{ form.rcant }}</div>
+              </div>
+              {% if request.user.is_staff %}
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.precioc.label }}</div>
+                <div class="col-12 col-md-9">{{ form.precioc }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.preciov.label }}</div>
+                <div class="col-12 col-md-9">{{ form.preciov }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.marca.label }}</div>
+                <div class="col-12 col-md-9">{{ form.marca }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.ubicacion.label }}</div>
+                <div class="col-12 col-md-9">{{ form.ubicacion }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.provedor_codigo.label}}</div>
+                <div class="col-12 col-md-9">{{ form.provedor_codigo}}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.carro.label}}</div>
+                <div class="col-12 col-md-9">{{ form.carro}}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.años.label}}</div>
+                <div class="col-12 col-md-9">{{ form.años}}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.posicion.label}}</div>
+                <div class="col-12 col-md-9">{{ form.posicion}}</div>
+              </div>
+              {% endif %}
+              <div class="text-right">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'inventario:listar_pastilla'%}" type="button" class='btn btn-danger'>Cancelar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+</form>
+
+{% endblock body %}

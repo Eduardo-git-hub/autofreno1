@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Crear Proveedor
+{% endblock title %}
+{% block body %}
+<form  method="post">
+      {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+      {% else %}
+        <div class="card">
+          <div class="card-header">
+            <strong>Registrar Proveedor</strong>
+          </div>
+          <div class="card-body card-block">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+              <div class="row form-group">
+                <div class="col col-md-3"><strong>{{ form.nombre.label }}*</strong></div>
+                <div class="col-12 col-md-9">{{ form.nombre }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3"><strong>{{ form.correo.label }}*</strong></div>
+                <div class="col-12 col-md-9">{{ form.correo }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.telefono.label }}</div>
+                <div class="col-12 col-md-9">{{ form.telefono }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3"><strong>{{ form.ruc.label }}*</strong></div>
+                <div class="col-12 col-md-9">{{ form.ruc }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.direccion.label }}</div>
+                <div class="col-12 col-md-9">{{ form.direccion }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.productos.label }}</div>
+                <div class="col-12 col-md-9">{{ form.productos }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.estado.label }}
+                </div>
+                <div class="col-12 col-md-9">{{form.estado}}
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'inventario:listar_proveedor'%}" type="button" class='btn btn-danger'>Cancelar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+</form>
+
+{% endblock body %}

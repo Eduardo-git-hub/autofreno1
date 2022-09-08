@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Venta
+{% endblock title %}
+{% block body %}
+<form id="form1" method="post">
+      {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+      {% else %}
+        <div class="card" id="formventa">
+          <div class="card-header">
+            <strong>Registrar Venta</strong>
+          </div>
+          {{ form.management_form }}
+          {% for f in form %}
+            <div class="card-body card-block">
+              <form class="form-horizontal" enctype="multipart/form-data" method="post">
+                <div class="row form-group">
+                  <div class="col col-md-3">{{ f.producto.label }}</div>
+                  <div class="col-12 col-md-9">{{ f.producto }}</div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3">{{ f.cliente.label }}</div>
+                  <div class="col-12 col-md-9">{{ f.cliente }}</div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3">{{ f.fecha.label }}</div>
+                  <div class="col-12 col-md-9">{{ f.fecha }}</div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3">{{ f.cantidad.label }}</div>
+                  <div class="col-12 col-md-9">{{f.cantidad}}
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col col-md-3">{{ f.total.label }}</div>
+                  <div class="col-12 col-md-9">{{f.total}}
+                  </div>
+                </div>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <a href="" type="button" class='btn btn-danger'>Cancelar</a>
+                </div>
+              </form>
+            </div>
+          {% endfor %}
+          <button onclick="addInput()">Add</button>
+        </div>
+      {% endif %}
+</form>
+
+{% endblock body %}
+
+{% block extrajs %}
+<script>
+  function addInput() {
+    var forms = document.querySelector('#id_form-TOTAL_FORMS')
+    var newinput = document.querySelector('#id_form-0-producto').cloneNode( true );
+    newinput.name = 'form-'+forms.value+'-producto';
+    newinput.id = 'id_form-'+forms.value+'-producto';
+    document.querySelector('#formventa').appendChild(newinput);
+  }
+</script>
+{% endblock extrajs %}

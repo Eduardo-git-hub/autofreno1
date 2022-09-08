@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Crear Categorias
+{% endblock title %}
+{% block body %}
+<form  method="post">
+      {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+      {% else %}
+        <div class="card">
+          <div class="card-header">
+            <strong>Formulario de Categorías</strong>
+          </div>
+          <div class="card-body card-block">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.nombre.label }}</div>
+                <div class="col-12 col-md-9">{{ form.nombre }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.ubicacion.label }}</div>
+                <div class="col-12 col-md-9">{{ form.ubicacion }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.descipcion.label }}</div>
+                <div class="col-12 col-md-9">{{ form.descipcion }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3" class ='myradio'>{{ form.estado.label }}
+                </div>
+                <div class="col-12 col-md-9">{{form.estado}}
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'inventario:listar_categoria'%}" type="button" class='btn btn-danger'>Cancelar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+</form>
+
+{% endblock body %}

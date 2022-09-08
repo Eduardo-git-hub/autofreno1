@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  Crear Catálogo
+{% endblock title %}
+{% block body %}
+<form  method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+      {% else %}
+        <div class="card">
+          <div class="card-header">
+            <strong>Formulario de Catálogo</strong>
+          </div>
+          <div class="card-body card-block">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.marca.label }}</div>
+                <div class="col-12 col-md-9">{{ form.marca }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.modelo.label }}</div>
+                <div class="col-12 col-md-9">{{ form.modelo}}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.años.label }}</div>
+                <div class="col-12 col-md-9">{{ form.años }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.posicion.label }}</div>
+                <div class="col-12 col-md-9">{{ form.posicion }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.dimensionx.label }}</div>
+                <div class="col-12 col-md-9">{{ form.dimensionx }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.dimensiony.label }}</div>
+                <div class="col-12 col-md-9">{{ form.dimensiony }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.dimensionz.label }}</div>
+                <div class="col-12 col-md-9">{{ form.dimensionz }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.existencia.label }}</div>
+                <div class="col-12 col-md-9">{{ form.existencia }}</div>
+              </div>
+              <div class="row form-group">
+                <div class="col col-md-3">{{ form.imagen.label }}</div>
+                <div class="col-12 col-md-9">{{ form.imagen }}</div>
+              </div>
+              <div class="text-right">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <a href="{% url 'catalogo:listar_catalogo' %}" type="button" class='btn btn-danger'>Cancelar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      {% endif %}
+</form>
+
+{% endblock body %}
