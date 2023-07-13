@@ -1,6 +1,6 @@
 # autofreno1
 
-Framwwork Django 3.2
+Framework Django 3.2
 Python 3.8.3
 PostgreSQL
 
