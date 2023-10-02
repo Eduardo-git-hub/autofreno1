@@ -13,7 +13,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'autofreno4',
         'USER': 'postgres',
-        'PASSWORD': 'autofrenorio',
+        'PASSWORD': '123',--> #Passsword of you BD
         'HOST': 'localhost',
         'PORT': 5432
     }
